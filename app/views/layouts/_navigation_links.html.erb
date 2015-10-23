@@ -4,9 +4,9 @@
 	    aria-haspopup="true" aria-expanded="false">Matches <span
 	class="caret"></span></a>
 	<ul class="dropdown-menu">
-	  <li><a href="#">Recent Matches</a></li>
+	  <li><%= link_to "Recent Matches", matches_recent_path %></li>
 	  <li><a href="#">All Matches</a></li>
-	  <li><a href="#">Record a Match</a></li>
+	  <li><%= link_to "Record a Match", new_match_path %></li>
 	  <li role="separator" class="divider"></li>
 	  <li><a href="#">Separated link</a></li>
 	  <li role="separator" class="divider"></li>
@@ -18,12 +18,11 @@
 	    aria-haspopup="true" aria-expanded="false">Players <span
 	class="caret"></span></a>
 	<ul class="dropdown-menu">
-	  <li><a href="#">List Players by Rank</a></li>
-	  <li><a href="#">List Players by Name</a></li>
+	  <li><%= link_to 'List Players by Rank', players_path %></li>
+	  <li><%= link_to 'List Players by Name', players_by_name_path %></li>
 	  <li><a href="#">List Inactive Players</a></li>
 	  <li role="separator" class="divider"></li>
-	  <li><%= link_to 'New Player', "#" %></li>
+	  <li><%= link_to 'New Player', new_player_path %></li>
 	  <li><a href="#">Edit Player</a></li>
 	</ul>
 </li>
-

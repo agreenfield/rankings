@@ -1,0 +1,45 @@
+<div>
+  <h1>Record a Match</h1>
+	<%= form_for(@match) do |m| %>
+<%#   <%= render 'shared/error_messages' %>
+    <form role="form">
+      <fieldset>
+        <legend>Players</legend>
+        <div class="row">
+          <div class="form-group col-sm-6">
+            <%= m.label :winner_id, class: "control-label" %><br>
+            <%= m.select :winner_id, options_for_select(Player.name_selection), class: "form-control" %>
+          </div>
+          <div class="form-group col-sm-6">
+            <%= m.label :loser_id, class: "control-label"  %><br>
+            <%= m.select :loser_id, options_for_select(Player.name_selection), class: "form-control" %>
+          </div>
+        <row>
+      </fieldset>
+
+      <fieldset>
+        <legend>Match Result</legend>
+        <div class="row">
+          <div class="form-group col-sm-3">
+            <%= m.label :date, class: "control-label" %><br>
+            <%= m.date_field :date, value: Time.now, class: "form-control", 
+                      autofocus: true %>
+          </div>
+
+          <div class="form-group col-sm-4">
+            <%= m.label :winner_score, "Winner Score", class: "control-label"  %><br>
+            <%= m.text_field :winner_score, class: "form-control" %>
+          </div>
+          <div class="form-group col-sm-4">
+            <%= m.label :loser_score, "Loser Score", class: "control-label"  %><br>
+            <%= m.text_field :loser_score, class: "form-control" %>
+          </div>
+        </div>
+        <div class="actions">
+          <%= m.submit "Record Match", class: "btn btn-primary" %>
+        </div>
+      <fieldset>
+    </form>
+  <% end %>
+</div>
+

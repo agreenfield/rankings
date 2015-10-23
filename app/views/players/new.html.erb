@@ -1,0 +1,36 @@
+<div>
+  <h1>Add Player</h1>
+	<%= form_for(@player) do |p| %>
+<%#   <%= render 'shared/error_messages' %>
+    <form role="form">
+      <div class="form-group">
+        <%= p.label :name %><br>
+        <%= p.text_field :name, class: "form-control", size: 40, autofocus: true,
+                                    placeholder: "e.g John Doe" %>
+      </div>
+      <div class="form-group">
+        <%= p.label :email %><br>
+        <%= p.text_field :email, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= p.label :phone %><br>
+        <%= p.text_field :phone, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= p.label :rank, "Initial rank" %><br>
+        <%= p.number_field :rank, class: "form-control" %>
+        <span class="help-block">
+          If the rank isn't on the ladder (e.g. 999) the player will be added to the bottom
+        </span> 
+      </div>
+      <div class="form-group">
+        <%= p.label :joined, "Date joined" %><br>
+        <%= p.date_field :joined, class: "form-control", value: Time.now %>
+      </div>
+      <div class="actions">
+        <%= p.submit "Add Player", class: "btn btn-primary" %>
+      </div>
+    </form>
+  <% end %>
+</div>
+
