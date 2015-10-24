@@ -11,6 +11,19 @@ class PlayersController < ApplicationController
 		@player = Player.new
 	end
 
+  def edit
+    @player = Player.find(params[:id])
+  end
+
+  def update
+    @player = Player.find(params[:id])
+    if @player.update_attributes(player_params)
+      redirect_to players_path, notice: 'Player was updated successfully'
+    else
+      render :edit
+    end
+  end
+
   def matches_played
     @player = Player.find(params[:id])
     @matches = @player.matches
