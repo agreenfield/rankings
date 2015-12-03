@@ -14,8 +14,19 @@ class Match < ActiveRecord::Base
   validates :loser_score, numericality: {greater_than_or_equal_to: 0, 
                                           less_than_or_equal_to: 9}
 
- validates :date, :winner_id, :loser_id, presence: true                                        
+  validates :date, :winner_id, :loser_id, presence: true                                        
 
+  
+  # Swaps the ranks of a match's players if the lower ranked player won
+  # Uses the associations defined for match to access winner and loser
+  def adjust_players
+    print "winner rank is #{winner.rank}, loser_rank is #{loser.rank}"
+    if winner.rank > loser.rank
+      temp = winner.rank
+      winner.update(rank: loser.rank)
+      loser.update(rank: temp)
+    end
+  end
 
   class MyValidator < ActiveModel::Validator
     def validate(match)
@@ -31,14 +42,6 @@ class Match < ActiveRecord::Base
   validates_with MyValidator
 
 
-  def self.getnames
-    print "running names"
-    @m = Match.select("matches.date, w.name, l.name").join('INNER JOIN players AS w ON matches.winner_id = w.id INNER JOIN players as l ON matches.loser_id = l.id')
-    print @m
-  end
 
-  def wun
-    puts "hello"
-  end
 
 end

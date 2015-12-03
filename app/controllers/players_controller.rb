@@ -1,10 +1,11 @@
 class PlayersController < ApplicationController
 	def index
-		@players = Player.order(rank: :asc)
+		@players = Player.where(hidden: false, deleted: false).order(rank: :asc)
 	end
 
   def by_name
-    @players = Player.order(name: :asc)
+    @active_players = Player.active_players_by_name
+    @inactive_players = Player.inactive_players_by_name
   end
 
 	def new
@@ -17,7 +18,16 @@ class PlayersController < ApplicationController
 
   def update
     @player = Player.find(params[:id])
-    if @player.update_attributes(player_params)
+    @now_hidden = !@player.hidden and params[:hidden]
+    @now_unhidden = @player.hidden and !params[:hidden]
+    @success = @player.update_attributes(player_params)
+    if @success 
+      if @now_hidden
+        @player.hide
+      elsif
+        @now_unhidden
+        @player.unhide
+      end
       redirect_to players_path, notice: 'Player was updated successfully'
     else
       render :edit
@@ -43,5 +53,5 @@ end
 private
   # Never trust parameters from the scary internet, only allow white list
   def player_params
-    params.require(:player).permit(:name, :email, :phone, :rank, :joined)
+    params.require(:player).permit(:name, :email, :phone, :rank, :joined, :hidden, :deleted)
   end

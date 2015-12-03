@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151022000250) do
+ActiveRecord::Schema.define(version: 20151028023157) do
 
   create_table "matches", force: :cascade do |t|
     t.datetime "date"
@@ -29,8 +29,10 @@ ActiveRecord::Schema.define(version: 20151022000250) do
     t.string   "phone"
     t.integer  "rank"
     t.datetime "joined"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.boolean  "hidden",     default: false
+    t.boolean  "deleted",    default: false
   end
 
 end

@@ -5,7 +5,7 @@ class MatchesController < ApplicationController
   end
 
   def index
-    @matches = Match.order(date: :desc)
+    @matches = Match.active_players_by_rank
   end
 
   def new
@@ -16,6 +16,7 @@ class MatchesController < ApplicationController
     @match = Match.new(match_params)
     if @match.save
       redirect_to matches_recent_path, notice: 'Match was recorded'
+      @match.adjust_players
     else
       @match.errors.messages do |message| 
         flash[:notice] << message

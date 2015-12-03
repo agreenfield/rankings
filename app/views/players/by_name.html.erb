@@ -1,21 +1,46 @@
 <body>
-  <h3>Players By Name</h3>
+  <h3>Active Players</h3>
   <table class="table table-striped">
     <thead>
       <tr>
         <th>Name</th>
         <th>Email</th>
         <th>Phone</th>
+        <th>Rank</th>
         <th colspan="3"></th>
       </tr>
     </thead>
 
     <tbody>
-      <% @players.each do |p| %>
+      <% @active_players.each do |p| %>
         <tr>
           <td><%= p.name %></td>
           <td><%= p.email %></td>
           <td><%= p.phone %></td>
+          <td><%= p.rank %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <h3>Inactive Players</h3>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Rank</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @inactive_players.each do |p| %>
+        <tr>
+          <td><%= p.name %></td>
+          <td><%= p.email %></td>
+          <td><%= p.phone %></td>
+          <td>Unranked</td>
         </tr>
       <% end %>
     </tbody>
